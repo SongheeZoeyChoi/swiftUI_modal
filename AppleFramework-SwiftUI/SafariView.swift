@@ -7,7 +7,9 @@
 
 import SwiftUI
 import SafariServices
-
+/*
+ UIViewControllerRepresentable: SwiftUI에서 UIKit을 사용할 때 사용.
+ */
 struct SafariView: UIViewControllerRepresentable {
     
     let url: URL

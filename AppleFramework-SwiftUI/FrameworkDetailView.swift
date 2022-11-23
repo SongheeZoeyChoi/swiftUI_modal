@@ -16,6 +16,8 @@ struct FrameworkDetailView: View {
 //    
     var body: some View {
         VStack(spacing: 30){
+            Spacer()
+            
             Image(viewModel.framework.imageName)
                 .resizable()
                 .frame(width: 90, height: 90)
@@ -24,9 +26,12 @@ struct FrameworkDetailView: View {
             Text(viewModel.framework.description)
                 .font(.system(size: 16, weight: .regular))
             
+            Spacer()
+            
             Button {
 //                presentationMode.wrappedValue.dismiss() // test : presentationMode를 사용하여 dismiss 처리
                 print("--->Safari 띄우기")
+                viewModel.isSafariPresented = true
             } label: {
                 Text("Learn More")
                     .font(.system(size: 20, weight: .bold, design: .default))
@@ -38,6 +43,11 @@ struct FrameworkDetailView: View {
 
         }
         .padding(EdgeInsets(top: 0, leading: 30, bottom: 30, trailing: 30))
+        .sheet(isPresented: $viewModel.isSafariPresented) {
+            let url = URL(string: viewModel.framework.urlString)!
+            SafariView(url: url)
+        }
+        
 //        //@Environment 환경변수 값 확인할 때
 //        .onAppear{
 //            print("onAppear: presentationMode value is \(presentationMode.wrappedValue.isPresented)")
